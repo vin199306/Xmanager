@@ -1,0 +1,49 @@
+name: Build Go Application
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+        check-latest: true
+
+    - name: Install GCC (required for Fyne)
+      run: |
+        choco install mingw -y
+        echo "C:\tools\mingw64\bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: go mod tidy
+
+    - name: Build
+      run: |
+        $version = "1.0.0"
+        $commitHash = git rev-parse --short HEAD
+        $buildTime = Get-Date -Format "yyyyMMddHHmmss"
+        $outputName = "program-manager-v$version-$commitHash-$buildTime.exe"
+        go build -ldflags="-s -w -H=windowsgui -X main.version=$version -X main.commit=$commitHash -X main.buildTime=$buildTime" -o $outputName ./cmd/app
+        echo "OUTPUT_NAME=$outputName" >> $env:GITHUB_ENV
+
+    - name: Create zip package
+      run: |
+        $zipName = "$env:OUTPUT_NAME.zip"
+        Compress-Archive -Path $env:OUTPUT_NAME -DestinationPath $zipName
+        echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: program-manager
+        path: ${{ env.ZIP_NAME }}
+        retention-days: 30
