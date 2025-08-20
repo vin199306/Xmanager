@@ -53,7 +53,7 @@ jobs:
         tar -czf ${{ env.BINARY_NAME }}-${{ github.ref_name }}-linux-amd64.tar.gz \
           ${{ env.BINARY_NAME }}-linux-amd64 \
           README.md \
-          web/ \
+          web/ \ 
           docs/
 
     - name: Upload build artifacts
