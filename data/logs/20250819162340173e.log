@@ -1,0 +1,2 @@
+{"timestamp":"2025-08-20T11:42:34.079555738+08:00","level":"INFO","message":"Program update validation passed | Context: {\"cmd\":\"/home/yanwen/bililive\",\"name\":\"bililive\"}","program_id":"20250819162340173e","source":"HANDLER"}
+{"timestamp":"2025-08-20T11:42:34.090561384+08:00","level":"INFO","message":"Program updated successfully | Context: {\"name\":\"bililive\"}","program_id":"20250819162340173e","source":"HANDLER"}

@@ -1,0 +1,40 @@
+# 发布配置
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - dependencies
+    authors:
+      - dependabot
+  categories:
+    - title: 🚀 新功能
+      labels:
+        - enhancement
+        - feature
+    - title: 🐛 修复
+      labels:
+        - bug
+        - fix
+    - title: 📚 文档
+      labels:
+        - documentation
+        - docs
+    - title: 🔧 改进
+      labels:
+        - improvement
+        - refactor
+    - title: 🧪 测试
+      labels:
+        - test
+        - testing
+    - title: 🔒 安全
+      labels:
+        - security
+    - title: 📦 依赖
+      labels:
+        - dependencies
+    - title: 🏗️ 构建
+      labels:
+        - build
+        - ci/cd
