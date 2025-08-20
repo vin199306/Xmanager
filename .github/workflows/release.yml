@@ -51,10 +51,7 @@ jobs:
     - name: Create release archive
       run: |
         tar -czf ${{ env.BINARY_NAME }}-${{ github.ref_name }}-linux-amd64.tar.gz \
-          ${{ env.BINARY_NAME }}-linux-amd64 \
-          README.md \
-          web/ \ 
-          docs/
+          ${{ env.BINARY_NAME }}-linux-amd64 
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
